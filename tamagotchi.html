@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamagotchi Spill</title>
+</head>
+<body>
+
+<h1>Tamagotchi</h1>
+<p>Glede: <span id="happiness-display">0</span> / 5</p>
+<p>Helse: <span id="health-display">0</span> / 5</p>
+
+<button onclick="playWithTamagotchi()">Lek</button>
+<button onclick="increaseHealth()">Øk Helse</button>
+
+<script>
+    var glede = 0;  // Start glede er 0
+    var maxGlede = 5;  // Maks glede er 5
+
+    var helse = 0;  // Start helse er 0
+    var maxHelse = 5;  // Maks helse er 5
+
+    function oppdaterDisplay() {
+        document.getElementById('happiness-display').textContent = glede;
+        document.getElementById('health-display').textContent = helse;
+    }
+
+    function playWithTamagotchi() {
+        if (glede < maxGlede) {
+            glede += 1;  // Øk glede med 1
+            oppdaterDisplay();
+        } else {
+            alert('Glede er på maks!');
+        }
+    }
+
+    function increaseHealth() {
+        if (helse < maxHelse) {
+            helse += 1;  // Øk helse med 1
+            oppdaterDisplay();
+        } else {
+            alert('Helse er på maks!');
+        }
+    }
+
+    function decreaseHealth() {
+        if (helse > 0) {
+            setTimeout(function() {
+                helse -= 1;  // Reduser helse med 1
+                oppdaterDisplay();
+                alert('Helse redusert.');
+            }, 3000); 
+        }
+    }
+
+    function decreaseHappiness() {
+        if (glede > 0) {
+            setTimeout(function() {
+                glede -= 1;  // Reduser glede med 1
+                oppdaterDisplay();
+                alert('Glede redusert.');
+            }, 3000); 
+        }
+    }
+
+    setInterval(function() {
+        if (helse < 3) {
+            alert('Tamagotchi trenger helse!');
+        } else if (glede < 3) {
+            alert('Tamagotchi er ikke glad.');
+        }
+
+        decreaseHealth();
+        decreaseHappiness();
+
+    }, 10000); 
+
+</script>
+
+</body>
+</html>
